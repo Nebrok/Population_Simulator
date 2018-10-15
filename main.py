@@ -19,7 +19,7 @@ def main():
 
     done = False
     clock = pygame.time.Clock()
-    screen.fill(BLACK)
+    screen.fill(WHITE)
 
     population = []
     tick = 1
@@ -27,8 +27,9 @@ def main():
     total_tick = 0
     
     for i in range(2):
-        newPerson = class_Person.Person(1, 30)
+        newPerson = class_Person.Person(size, screen, 1, 30)
         population.append(newPerson)
+    hit_list = 0
 
     while not done:
         for event in pygame.event.get():
@@ -36,44 +37,40 @@ def main():
                 done = True
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 done = True
-
-        while year < 225:
-            if tick == 30:
+        
+        
+        for num in range(10):
+            screen.fill(WHITE)
+            if tick == 15:
                 for i in range(len(population)):
                     population[i].grow(1)
+
                 for i in range(0, len(population), 2):
                     population[i].reproduce(population)
+
                 pop_length = len(population)
                 for i in range(pop_length-1, 0, -1): 
-                    population[i].die(population, i)
+                    hit_list += population[i].die(population, i)
+
+
                 year += 1
                 tick = 0
-                total_tick += 1
-            tick = tick + 1
+            tick += 1
             total_tick += 1
-            
-            
-        done = True
+            if total_tick % 400 == 0:
+                print("YEAR:", str(year))
+                print("POPULATION " + str(len(population)))
+                print("HIT LIST:", hit_list)
 
-
-
+        for person in population:
+            person.draw()
+        pygame.display.flip()
+              
 
         #End of Loop
-        pygame.display.flip()
-        clock.tick(15)
-
-    print(len(population))
-    print(total_tick)
+        clock.tick(30)
 
 
     pygame.quit()
 
 main()
-
-
-
-qoot = False
-while not qoot:
-    input("Press q to quit: ")
-    if x == q:
-        qoot = True
