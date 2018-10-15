@@ -39,9 +39,9 @@ def main():
                 done = True
         
         
-        for num in range(10):
+        for num in range(5):
             screen.fill(WHITE)
-            if tick == 15:
+            if tick == 10:
                 for i in range(len(population)):
                     population[i].grow(1)
 
@@ -57,7 +57,7 @@ def main():
                 tick = 0
             tick += 1
             total_tick += 1
-            if total_tick % 400 == 0:
+            if total_tick % 100 == 0:
                 print("YEAR:", str(year))
                 print("POPULATION " + str(len(population)))
                 print("HIT LIST:", hit_list)
