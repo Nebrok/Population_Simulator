@@ -7,6 +7,28 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
+class Graph():
+    def __init__(self, res, screen):
+        self.res = res
+        self.screen = screen
+        #if self.lisst % 2 != 0:
+        #    self.lisst.pop[0]
+
+    def draw(self, lisst):
+        #line(Surface, color, start_pos, end_pos, width=1) -> Rec
+        #if prev_pos[0] > res[0]:
+        #    pass
+            
+        prev_pos = (self.res[0]/2, self.res[1])
+        i = 0
+        for population in lisst:
+            cur_pos = (self.res[0]/2+i/8, self.res[1]-population/100)
+            pygame.draw.line(self.screen, BLACK, prev_pos, cur_pos, 4)
+            prev_pos = cur_pos
+            i += 1
+            
+        
+
 class Person():
     
     def __init__(self, size, screen, generation, age):
@@ -15,7 +37,7 @@ class Person():
         self.gen = generation
         self.age = age
         self.last_birth_age = 10
-        self.address = (random.randint(0, size[0]), random.randint(0, size[1]))
+        self.address = (random.randint(0, size[0])/2, random.randint(0, size[1]))
         self.children = 0
 
     def draw(self):
@@ -42,9 +64,6 @@ class Person():
             self.last_birth_age += 1
         else:
             return 0
-
-                
-            
 
     def grow(self, growth):
         self.age = self.age + growth
