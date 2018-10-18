@@ -21,6 +21,8 @@ def main():
     clock = pygame.time.Clock()
     screen.fill(WHITE)
 
+    mid_point = (size[0]/4, size[1]/2)
+
     population = []
     tick = 1
     year = 1
@@ -32,8 +34,9 @@ def main():
 
     gragh = class_Person.Graph(size, screen)
     
-    for i in range(2):
-        newPerson = class_Person.Person(size, screen, 1, 30)
+    for i in range(4):
+        random_address = (random.randint(0, size[0])/2, random.randint(0, size[1]))
+        newPerson = class_Person.Person(size, screen, 1, 30, random_address)
         population.append(newPerson)
     
 
@@ -49,6 +52,7 @@ def main():
                 for person in population:
                     if i > 50:
                         del population[i]
+                        hit_list += 1
                         i -= 1
                     i += 1
         
