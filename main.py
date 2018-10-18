@@ -34,7 +34,7 @@ def main():
 
     gragh = class_Person.Graph(size, screen)
     
-    for i in range(4):
+    for i in range(6):
         random_address = (random.randint(0, size[0])/2, random.randint(0, size[1]))
         newPerson = class_Person.Person(size, screen, 1, 30, random_address)
         population.append(newPerson)

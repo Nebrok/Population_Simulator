@@ -62,7 +62,8 @@ class Person():
                     pass
                 y = math.sqrt(lazy)
                 baby_address = (self.address[0]+x*self.pos_neg(), self.address[1]+y*self.pos_neg())
-                
+                #if not self.outside(baby_address):
+                #    baby_address = (baby_address[0]-self.size[0], baby_address[1]-self.size[1])
                 baby = Person(self.size, self.screen, new_gen, 0, baby_address)
                 survive = random.random()
 
@@ -102,7 +103,10 @@ class Person():
         else:
             return 1
 
-    def outside():
-        pass
+    def outside(self, point):
+        if (point[0] < 0 or point[0] > self.size[0]) and (point[1] < 0 or point[1] > self.size[1]):
+            return True
+        else:
+            return False
             
             
