@@ -12,14 +12,8 @@ class Graph():
     def __init__(self, res, screen):
         self.res = res
         self.screen = screen
-        #if self.lisst % 2 != 0:
-        #    self.lisst.pop[0]
 
     def draw(self, lisst):
-        #line(Surface, color, start_pos, end_pos, width=1) -> Rec
-        #if prev_pos[0] > res[0]:
-        #    pass
-            
         prev_pos = (self.res[0]/2, self.res[1])
         i = 0
         for population in lisst:
@@ -55,16 +49,28 @@ class Person():
                 r = random.randint(1, self.nhood)
                 x = random.randint(-r, r)
                 polarisation = 0
-                lazy = r - x**2
-                if lazy < 0:
-                    lazy = lazy*-1
+                y = r - x ** 2
+
+                if y < 0:
+                    y = y * -1
                 else:
                     pass
-                y = math.sqrt(lazy)
-                baby_address = (self.address[0]+x*self.pos_neg(), self.address[1]+y*self.pos_neg())
-                #if not self.outside(baby_address):
-                #    baby_address = (baby_address[0]-self.size[0], baby_address[1]-self.size[1])
+                y = math.sqrt(y)
+                baby_address = [self.address[0]+x*self.pos_neg(), self.address[1]+y*self.pos_neg()]
+
                 baby = Person(self.size, self.screen, new_gen, 0, baby_address)
+
+
+                x_pos = baby_address[0]
+                y_pos = baby_address[1]
+
+                if (x_pos < 0 or x_pos > 600):
+                    baby_address[0] = abs(baby_address[0]-600)
+
+                if (y_pos < 0 or y_pos > 600):
+                    baby_address[1] = abs(baby_address[1]-600)
+
+                baby.address = baby_address
                 survive = random.random()
 
                 if survive > 0.1:
@@ -101,12 +107,5 @@ class Person():
         if n == 0:
             return -1
         else:
-            return 1
-
-    def outside(self, point):
-        if (point[0] < 0 or point[0] > self.size[0]) and (point[1] < 0 or point[1] > self.size[1]):
-            return True
-        else:
-            return False
-            
+            return 1 
             

@@ -12,7 +12,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 def main():
-    size = (1200,500)
+    size = (1200,600)
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Population Simulator")
 
@@ -20,8 +20,6 @@ def main():
     done = False
     clock = pygame.time.Clock()
     screen.fill(WHITE)
-
-    mid_point = (size[0]/4, size[1]/2)
 
     population = []
     tick = 1
