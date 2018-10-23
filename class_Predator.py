@@ -6,29 +6,26 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)       
+BLUE = (0, 0, 255)  
 
-class Person():
-    
+class Predator():
     def __init__(self, size, screen, generation, age, address):
         self.size = size
         self.screen = screen
         self.gen = generation
         self.age = age
-        self.last_birth_age = 10
+        self.last_birth_age = 51
         self.address = address
-        self.x = address[0]
-        self.y = address[1]
         self.children = 0
 
-        self.nhood = 50
+        self.nhood = 100
 
     def draw(self):
-        pygame.draw.rect(self.screen, BLACK, (self.address[0], self.address[1], 1, 1))
+        pygame.draw.rect(self.screen, RED, (self.address[0], self.address[1], 1, 1))
 
     def reproduce(self, pop):
-        if self.age >= 20 and self.age <= 45 and self.children <= 3:
-            if self.last_birth_age > 4:
+        if self.age >= 20 and self.age <= 45 and self.children <= 2:
+            if self.last_birth_age > 50:
                 new_gen = self.gen + 1
 
                 r = random.randint(1, self.nhood)
@@ -37,6 +34,9 @@ class Person():
 
                 y = math.sqrt(abs(y))
                 baby_address = [self.address[0]+x*self.pos_neg(), self.address[1]+y*self.pos_neg()]
+
+                baby = Predator(self.size, self.screen, new_gen, 0, baby_address)
+
 
                 x_pos = baby_address[0]
                 y_pos = baby_address[1]
@@ -47,11 +47,7 @@ class Person():
                 if (y_pos < 0 or y_pos > 600):
                     baby_address[1] = abs(baby_address[1]-600)
 
-                #if baby_address[0] >= 600:
-                    #print(baby_address[0])
-                
-                baby = Person(self.size, self.screen, new_gen, 0, baby_address)
-               
+                baby.address = baby_address
                 survive = random.random()
 
                 if survive > 0.1:
@@ -74,7 +70,7 @@ class Person():
 
     def die(self, lisst, index):
         will_die = random.random()
-        if self.age > 75:
+        if self.age > 200:
             del(lisst[index])
             return 1
         elif will_die < 0.02:
@@ -88,5 +84,14 @@ class Person():
         if n == 0:
             return -1
         else:
-            return 1 
-            
+            return 1
+
+    def kill(self, prey_list):
+        i = 0
+        for prey in prey_list:
+            preyX = prey.x
+            preyY = prey.y
+            c = math.sqrt(abs(self.address[0] - preyX) + abs(self.address[1] - preyY))
+            if c <= 2:
+                del(prey_list[i])
+            i += 1

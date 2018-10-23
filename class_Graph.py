@@ -17,11 +17,11 @@ class Graph():
     def draw(self, lisst):
         prev_pos = (self.res[0]/2, self.res[1])
         i = 0
-        for population in lisst: 
-            cur_pos = (self.res[0]/2+i/8, self.res[1]-population/600)
+        for population in lisst:
+            cur_pos = (self.res[0]/2+i/8, self.res[1]-population/100)
             pygame.draw.line(self.screen, BLACK, prev_pos, cur_pos, 2)
             prev_pos = cur_pos
             i += 1
-            
+
             
         
