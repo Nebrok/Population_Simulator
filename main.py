@@ -2,6 +2,7 @@ import pygame
 import math
 import random
 import class_Person
+import class_Graph
 
 pygame.init()
 
@@ -30,13 +31,12 @@ def main():
 
     population_over_years = []
 
-    gragh = class_Person.Graph(size, screen)
+    graph = class_Graph.Graph(size, screen)
     
-    for i in range(6):
+    for i in range(10):
         random_address = (random.randint(0, size[0])/2, random.randint(0, size[1]))
         newPerson = class_Person.Person(size, screen, 1, 30, random_address)
         population.append(newPerson)
-    
 
     while not done:
         for event in pygame.event.get():
@@ -54,6 +54,7 @@ def main():
                         i -= 1
                     i += 1
         
+    
         for num in range(5):
             if tick == 10:
                 for i in range(len(population)):
@@ -66,28 +67,27 @@ def main():
                 for i in range(pop_length-1, 0, -1): 
                     hit_list += population[i].die(population, i)
 
-
                 year += 1
                 tick = 0
             tick += 1
             total_tick += 1
+            
             if total_tick % 50 == 0:
                 print("YEAR:", str(year))
-                print("POPULATION " + str(len(population)))
+                print("POPULATION: " + str(len(population)))
                 print("HIT LIST:", hit_list)
+            
             population_over_years.append(len(population))
 
+
+        # ------------DRAWING STUFF------------
         screen.fill(WHITE)
-        gragh.draw(population_over_years)
+        graph.draw(population_over_years)
         for person in population:
             person.draw()
         pygame.display.flip()
-              
 
         #End of Loop
         clock.tick(30)
-
-
     pygame.quit()
-
 main()
