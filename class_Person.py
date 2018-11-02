@@ -41,11 +41,18 @@ class Person():
                 x_pos = baby_address[0]
                 y_pos = baby_address[1]
 
-                if (x_pos < 0 or x_pos > 600):
+                if (x_pos < 0):
+                    baby_address[0] = 600 - abs(baby_address[0])
+
+                if (x_pos > 600):
                     baby_address[0] = abs(baby_address[0]-600)
 
-                if (y_pos < 0 or y_pos > 600):
+                if (y_pos < 0):
+                    baby_address[1] = 600 - abs(baby_address[1])
+
+                if (y_pos > 600):
                     baby_address[1] = abs(baby_address[1]-600)
+                        
 
                 baby = Person(self.size, self.screen, new_gen, 0, baby_address)
                
