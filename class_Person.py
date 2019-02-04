@@ -55,9 +55,7 @@ class Person():
                         
 
                 baby = Person(self.size, self.screen, new_gen, 0, baby_address)
-               
-                survive = random.random()
-                
+                               
                 pop.append(baby)
                 self.children += 1
             
