@@ -9,19 +9,19 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)       
 
 class Person():
-    
     def __init__(self, size, screen, generation, age, address):
-        self.size = size
+        self.world_dimensions = size
         self.screen = screen
+
         self.gen = generation
         self.age = age
-        self.last_birth_age = 10
-        self.address = address
-        self.x = address[0]
-        self.y = address[1]
-        self.children = 0
 
-        self.nhood = 50
+        self.last_birth_age = 10
+
+        self.address = address
+
+        self.children = 0
+        self.nhood = 25
 
     def draw(self):
         pygame.draw.rect(self.screen, BLACK, (self.address[0], self.address[1], 1, 1))
@@ -44,17 +44,17 @@ class Person():
                 if (x_pos < 0):
                     baby_address[0] = 600 - abs(baby_address[0])
 
-                if (x_pos > 600):
-                    baby_address[0] = abs(baby_address[0]-600)
+                if (x_pos > self.world_dimensions[0]):
+                    baby_address[0] = abs(baby_address[0]-self.world_dimensions[0])
 
                 if (y_pos < 0):
-                    baby_address[1] = 600 - abs(baby_address[1])
+                    baby_address[1] = self.world_dimensions[1] - abs(baby_address[1])
 
-                if (y_pos > 600):
-                    baby_address[1] = abs(baby_address[1]-600)
+                if (y_pos > self.world_dimensions[1]):
+                    baby_address[1] = abs(baby_address[1]-self.world_dimensions[1])
                         
 
-                baby = Person(self.size, self.screen, new_gen, 0, baby_address)
+                baby = Person(self.world_dimensions, self.screen, new_gen, 0, baby_address)
                                
                 pop.append(baby)
                 self.children += 1

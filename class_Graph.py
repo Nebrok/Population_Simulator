@@ -1,4 +1,4 @@
-import main
+#import main
 import pygame
 import random
 import math
@@ -26,7 +26,6 @@ class Graph():
             i += 1
         if cur_pos[0] > self.res[0]:
             self.last_iter += cur_pos[0]-self.res[0]
-            print(self.last_iter)
 
 
 
